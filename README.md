@@ -22,3 +22,54 @@ The implementation of the server and the ```server.js``` is not important for th
 
 Every data source in this project was created for test purposes. If any request takes more than 5 seconds to execute, there is something wrong with the implementation.
 
+## Debrief on Current Implementation
+
+### 1. Documentation and References
+The project lacks detailed documentation regarding the API being integrated. To improve clarity and assist future developers, it's recommended to:
+- Include references to the relevant API documentation.
+- Example: [HubSpot API Documentation](https://developers.hubspot.com/beta-docs/guides/api/crm/associations/associations-v3#retrieve-associations).
+
+---
+
+### 2. Testing Database
+- The testing database does not provide a robust environment for validating functionality.  
+- The API is only returning older contact data, with no recent entries available.
+- This limitation makes it difficult to test and validate features thoroughly.
+- Populate the database with recent and diverse data would facilitate comprehensive testing.
+
+---
+
+## 3. Endpoint Issues
+The `/crm/v3/associations/MEETINGS/CONTACTS/batch/read` endpoint is not returning associated contacts.  
+- The endpoint appears to be configured correctly based on the documentation (https://developers.hubspot.com/beta-docs/guides/api/crm/associations/associations-v3#retrieve-associations).
+- The lack of results might be related to the testing database not containing recent data.
+
+---
+
+## 4. Further Investigation
+To ensure full functionality:
+- Perform a deeper analysis of the integrated API.
+- Test all endpoints with a properly populated testing environment containing recent data.
+
+---
+
+## 5. Transition to TypeScript
+Switching from JavaScript to TypeScript is recommended to:
+- Improve type safety.
+- Enhance code organization.
+- Reduce the likelihood of runtime errors.
+
+---
+
+## 6. Scaling Considerations
+- Implement a **message broker** system (e.g., RabbitMQ, Kafka) to enable parallel processing.
+- This will allow the service to efficiently handle large batches of data while maintaining performance.
+
+---
+
+## 7. Enhanced Logging System
+The current logging system could be upgraded to provide better observability.  
+- Integrate with tools like **Datadog** to:
+  - Improve visibility into service operations.
+  - Identify and debug issues faster.
+  - Monitor performance metrics in real-time.
